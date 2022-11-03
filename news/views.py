@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from news.models import News
 
 
-# Create your views here.
 def index(request):
-    #   print(request)
-    return HttpResponse('Hello World')
+    news = News.objects.all()
+    context = {
+        'news': news,
+        'title': 'Список новостей'}
 
-
-def test(request):
-    return HttpResponse('<h1>Test</h1>')
+    return render(request, 'news/index.html', context)
