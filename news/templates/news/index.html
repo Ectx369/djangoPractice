@@ -32,9 +32,20 @@
                 <div class="card mb-3">
                     <h5 class="card-header">Категория: {{ item.category.title }}</h5>
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.title }}</h5>
-                        <p class="card-text">{{ item.content }}</p>
-                        <a href="#" class="btn btn-primary">Read more...</a>
+                        <div class="media">
+                            {% if item.photo %}
+                                <img src="{{ item.photo.url }}" alt="img" width="350" class="me-3 float-start">
+                            {% else %}
+                                <img src="https://via.placeholder.com/350x235" alt="img" width="350" class="me-3 float-start">
+                            {% endif %}
+
+                            <div class="media-body">
+                                <h5 class="card-title">{{ item.title }}</h5>
+                                <p class="card-text">{{ item.content | linebreaks | truncatewords:50}}</p>
+                                <a href="#" class="btn btn-primary">Read more...</a>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="card-footer text-muted">
                         {{ item.created_at|date:"Y-m-d H:i:s" }}
